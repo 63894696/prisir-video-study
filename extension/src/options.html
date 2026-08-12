@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>Prisir 视频学习 — 设置</title>
+  <link rel="stylesheet" href="options.css" />
+</head>
+<body>
+  <h1>视频学习 — 设置</h1>
+  <p class="lead">双语字幕 + AI 帧笔记的所有配置都保存在本机(<code>chrome.storage.local</code>),不上传、不收集。绝大多数用户只需填一次端点。</p>
+
+  <fieldset>
+    <legend>字幕翻译引擎</legend>
+    <label class="radio"><input type="radio" name="engine" value="auto" /> <strong>自动(推荐)</strong> — 能连 Google 用内置免 Key 翻译,否则用下方自定义端点</label>
+    <label class="radio"><input type="radio" name="engine" value="google_gtx" /> 内置翻译(Google,免 Key)— 需能访问 Google</label>
+    <label class="radio"><input type="radio" name="engine" value="openai_compat" /> 自定义端点(OpenAI 兼容)— 自己选模型厂商,填端点 + Key</label>
+    <p class="hint">字幕轨走纯翻译。选「自定义端点」可接入任何 OpenAI 兼容服务。<a href="https://www.babelspan.com/models.html" target="_blank" rel="noopener">不知道选哪个?看模型怎么选 →</a></p>
+  </fieldset>
+
+  <fieldset id="custom-fieldset">
+    <legend>自定义端点(字幕翻译 + 帧笔记共用端点与 Key)</legend>
+    <label>API Base URL
+      <input type="text" id="baseURL" placeholder="https://api.example.com/v1" />
+    </label>
+    <label>模型名(Model,字幕翻译用)
+      <span class="model-row">
+        <input type="text" id="model" list="model-list" placeholder="填好 URL+Key 后点右侧拉取,免手输" />
+        <datalist id="model-list"></datalist>
+        <button id="fetch-models" type="button" class="mini">拉取模型列表</button>
+      </span>
+    </label>
+    <label>多模态模型(帧笔记用,可选;留空复用上面模型)
+      <input type="text" id="visionModel" placeholder="如 agnes-2.5-flash / kimi-k2.5 / MiniMax-M3" />
+    </label>
+    <label>API Key(仅存本机)
+      <input type="password" id="apiKey" placeholder="sk-..." autocomplete="off" />
+    </label>
+    <p class="hint" id="fetch-models-hint">帧笔记需要<strong>多模态(能看图)</strong>的模型。Key 只保存在本机。</p>
+    <p class="hint">
+      <button id="test-service" type="button" class="mini">测试服务</button>
+      <span id="test-service-result"></span>
+    </p>
+  </fieldset>
+
+  <fieldset id="subtitle-fieldset">
+    <legend>双语字幕</legend>
+    <label class="check">
+      <input type="checkbox" id="subtitlesEnabled" checked />
+      开启视频双语字幕(YouTube 及支持 HTML5 字幕的网站)
+    </label>
+    <label>字幕模式
+      <select id="subtitleMode">
+        <option value="bilingual">双语对照(原文上 / 译文下)</option>
+        <option value="replace">仅译文</option>
+      </select>
+    </label>
+    <label class="check">
+      <input type="checkbox" id="subtitlePreferManual" checked />
+      优先使用人工字幕(无人工字幕时回落机翻)
+    </label>
+  </fieldset>
+
+  <fieldset id="notes-fieldset">
+    <legend>AI 帧笔记</legend>
+    <label>抽帧间隔(秒;越大越省 token,默认 8)
+      <input type="number" id="notesIntervalSec" min="3" max="60" value="8" />
+    </label>
+    <p class="hint">帧笔记自动跳过画面无变化的帧(内容感知去重),相同内容不重复发请求、不重复记。笔记带时间戳可点击跳回,看完可导出 Markdown(YAML + HoverNotes 分段)。</p>
+  </fieldset>
+
+  <fieldset>
+    <legend>通用</legend>
+    <label>目标语言
+      <select id="dstLang"></select>
+    </label>
+    <label>温度(0–2,越小越稳定;仅自定义端点字幕翻译)
+      <input type="number" id="temperature" min="0" max="2" step="0.1" value="0.2" />
+    </label>
+  </fieldset>
+
+  <div class="actions">
+    <button id="save" class="primary">保存</button>
+    <button id="reset">恢复默认</button>
+    <span id="msg" class="hint"></span>
+  </div>
+
+  <script src="langs.js"></script>
+  <script src="options.js"></script>
+</body>
+</html>

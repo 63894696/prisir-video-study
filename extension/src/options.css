@@ -1,0 +1,42 @@
+/* Prisir 视频学习 · options 样式(自包含,与翻译插件一致的暗色铜调) */
+* { box-sizing: border-box; }
+body {
+  margin: 0; padding: 2rem 1rem 4rem;
+  font-family: "Sora", system-ui, sans-serif;
+  background: linear-gradient(165deg, #0e1116, #171c24 50%, #12151a);
+  color: #e8dcc6; min-height: 100vh;
+  max-width: 720px; margin-inline: auto;
+}
+h1 { font-size: 1.5rem; font-weight: 600; margin: 0 0 .4rem; }
+.lead { color: #9aa3b2; line-height: 1.6; margin: 0 0 1.4rem; font-size: .9rem; }
+code { background: #1c222b; border: 1px solid rgba(232,220,198,.12); border-radius: .3rem; padding: .08em .38em; font-size: .85em; }
+fieldset {
+  border: 1px solid rgba(232,220,198,.12); border-radius: .7rem;
+  padding: 1rem 1.1rem 1.1rem; margin: 0 0 1.1rem; background: rgba(255,255,255,.03);
+}
+legend { padding: 0 .4rem; color: #e09a55; font-weight: 600; font-size: .9rem; }
+label { display: block; margin: .7rem 0; color: #e8dcc6; font-size: .9rem; }
+label.check, label.radio { display: flex; align-items: center; gap: .5rem; font-weight: 400; color: #9aa3b2; }
+label.radio strong { color: #e8dcc6; }
+input[type="text"], input[type="password"], input[type="number"], select, textarea {
+  width: 100%; margin-top: .3rem; padding: .5rem .6rem;
+  background: #0a0c10; color: #e8dcc6;
+  border: 1px solid rgba(232,220,198,.18); border-radius: .45rem;
+  font: inherit; font-size: .88rem;
+}
+label.check input, label.radio input { width: auto; margin-top: 0; }
+input:focus, select:focus, textarea:focus { outline: none; border-color: #e09a55; }
+.model-row { display: flex; gap: .5rem; align-items: center; }
+.model-row input { flex: 1; }
+.hint { color: #9aa3b2; font-size: .8rem; line-height: 1.5; margin: .5rem 0 0; }
+.hint a { color: #e09a55; }
+button {
+  cursor: pointer; font: inherit; font-size: .88rem;
+  border-radius: .5rem; border: 1px solid rgba(232,220,198,.2);
+  background: rgba(255,255,255,.05); color: #e8dcc6; padding: .5rem 1rem;
+}
+button:hover { background: rgba(255,255,255,.1); }
+button.primary { background: rgba(196,122,58,.2); border-color: rgba(224,154,85,.55); color: #e09a55; font-weight: 600; }
+button.mini { padding: .3rem .7rem; font-size: .8rem; white-space: nowrap; }
+.actions { display: flex; gap: .7rem; align-items: center; margin-top: 1.4rem; }
+#test-service-result { margin-left: .6rem; font-size: .84rem; }

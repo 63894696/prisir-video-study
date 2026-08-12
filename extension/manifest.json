@@ -1,0 +1,50 @@
+{
+  "manifest_version": 3,
+  "name": "Prisir 视频学习",
+  "version": "0.1.0",
+  "description": "视频学习:一键开双语字幕 + AI 帧笔记。悬停视频出现入口,字幕纯翻译与多模态笔记并行,笔记带时间戳可跳转、导出 Markdown。密钥仅存本机。",
+  "minimum_chrome_version": "116",
+  "action": {
+    "default_popup": "src/popup.html",
+    "default_icon": {
+      "16": "icons/16.png",
+      "32": "icons/32.png",
+      "48": "icons/48.png",
+      "128": "icons/128.png"
+    },
+    "default_title": "视频学习"
+  },
+  "icons": {
+    "16": "icons/16.png",
+    "32": "icons/32.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png"
+  },
+  "background": {
+    "service_worker": "src/background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "exclude_matches": ["file:///*"],
+      "js": ["src/langs.js", "src/subtitles.js", "src/video-notes.js", "src/video-study.js"],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ],
+  "options_ui": {
+    "page": "src/options.html",
+    "open_in_tab": true
+  },
+  "permissions": ["storage", "activeTab", "scripting"],
+  "host_permissions": [
+    "https://www.youtube.com/*"
+  ],
+  "optional_host_permissions": [
+    "https://*/*",
+    "http://*/*"
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
+  }
+}
