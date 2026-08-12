@@ -1,0 +1,12 @@
+# 测试脚本与截图(E2E 产物,不入库)
+tests/_*.py
+tests/_*.jpg
+tests/_*.png
+# 本地截图/日志
+_*.jpg
+_*.png
+_*.log
+# 系统/编辑器
+.DS_Store
+Thumbs.db
+node_modules/
